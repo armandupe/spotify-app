@@ -1,12 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Spotify</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,200,300,regular,500,600,700,100italic,200italic,300italic,italic,500italic,600italic,700italic"
+      rel="stylesheet"
+    />
+    <title>SpotifyApp</title>
   </head>
   <body>
-    <h1></h1>
+    <h1>Tоп исполнителей</h1>
+    <form class="queryOptionsForm" action="">
+      <div>
+        <input id="1" type="radio" name="range" value="short_term" />
+        <label for="1">Топ исполнителей за последнее время</label>
+      </div>
+      <div>
+        <input id="2" type="radio" name="range" value="medium_term" />
+        <label for="2">Топ исполнителей за средний промежуток</label>
+      </div>
+      <div>
+        <input id="3" type="radio" name="range" value="long_term" />
+        <label for="3">Топ исполнителей за все время</label>
+      </div>
+    </form>
   </body>
 </html>
