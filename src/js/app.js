@@ -41,49 +41,52 @@ queryOptionsForm.addEventListener("click", (e) => {
     })
       .then((res) => res.json())
       .then((response) => {
-        const main = document.createElement("main");
+        if (document.body.childNodes[8] === undefined) {
+          const main = document.createElement("main");
+          response.items.forEach((item) => {
+            let artistName = item.name;
+            let artistImages = item.images;
+            let artistPopularity = item.popularity;
+            let artistLink = item.external_urls.spotify;
+            let artistFollowers = `${item.followers.total} followers`;
+            let artistsGenres = item.genres;
 
-        response.items.forEach((item) => {
-          let artistName = item.name;
-          let artistImages = item.images;
-          let artistPopularity = item.popularity;
-          let artistLink = item.external_urls.spotify;
-          let artistFollowers = `${item.followers.total} followers`;
-          let artistsGenres = item.genres;
+            const section = document.createElement("section");
+            const ul = document.createElement("ul");
 
-          const section = document.createElement("section");
-          const ul = document.createElement("ul");
+            artistsGenres.forEach((genre) => {
+              let artistGenre = genre;
+              const li = document.createElement("li");
+              li.textContent = artistGenre;
+              ul.insertAdjacentElement("afterbegin", li);
+              section.insertAdjacentElement("beforeend", ul);
+            });
 
-          artistsGenres.forEach((genre) => {
-            let artistGenre = genre;
-            const li = document.createElement("li");
-            li.textContent = artistGenre;
-            ul.insertAdjacentElement("afterbegin", li);
-            section.insertAdjacentElement("beforeend", ul);
+            let fragment = document.createDocumentFragment();
+
+            const image = document.createElement("img");
+            image.src = artistImages[1].url;
+            section.insertAdjacentElement("afterbegin", image);
+
+            const link = document.createElement("a");
+            const title = document.createElement("h2");
+            link.href = artistLink;
+            title.textContent = artistName;
+            link.insertAdjacentElement("afterbegin", title);
+            section.insertAdjacentElement("afterbegin", link);
+
+            const followers = document.createElement("span");
+            followers.textContent = artistFollowers;
+            section.insertAdjacentElement("beforeend", followers);
+
+            main.insertAdjacentElement("afterbegin", section);
+            fragment.appendChild(main);
+
+            document.body.appendChild(fragment);
           });
-
-          let fragment = document.createDocumentFragment();
-
-          const image = document.createElement("img");
-          image.src = artistImages[1].url;
-          section.insertAdjacentElement("afterbegin", image);
-
-          const link = document.createElement("a");
-          const title = document.createElement("h2");
-          link.href = artistLink;
-          title.textContent = artistName;
-          link.insertAdjacentElement("afterbegin", title);
-          section.insertAdjacentElement("afterbegin", link);
-
-          const followers = document.createElement("span");
-          followers.textContent = artistFollowers;
-          section.insertAdjacentElement("beforeend", followers);
-
-          main.insertAdjacentElement("afterbegin", section);
-          fragment.appendChild(main);
-
-          document.body.appendChild(fragment);
-        });
+        } else if (document.body.childNodes[8] !== undefined) {
+          document.body.querySelector("main").remove();
+        }
       });
   }
 
