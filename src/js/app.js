@@ -48,38 +48,41 @@ queryOptionsForm.addEventListener("click", (e) => {
             let artistImages = item.images;
             let artistPopularity = item.popularity;
             let artistLink = item.external_urls.spotify;
-            let artistFollowers = `${item.followers.total} followers`;
+            let artistFollowers = `${item.followers.total} подписчиков`;
             let artistsGenres = item.genres;
 
             const section = document.createElement("section");
+            const link = document.createElement("a");
+            const image = document.createElement("img");
+            const h3 = document.createElement("h3");
             const ul = document.createElement("ul");
+            const title = document.createElement("h2");
+            const followers = document.createElement("span");
+
+            image.src = artistImages[1].url;
+            h3.textContent = "Жанровые теги";
+            link.target = "_blank";
+            link.href = artistLink;
+            title.textContent = artistName;
+            followers.textContent = artistFollowers;
 
             artistsGenres.forEach((genre) => {
               let artistGenre = genre;
               const li = document.createElement("li");
               li.textContent = artistGenre;
               ul.insertAdjacentElement("afterbegin", li);
-              section.insertAdjacentElement("beforeend", ul);
+              link.insertAdjacentElement("afterbegin", ul);
             });
 
             let fragment = document.createDocumentFragment();
 
-            const image = document.createElement("img");
-            image.src = artistImages[1].url;
-            section.insertAdjacentElement("afterbegin", image);
-
-            const link = document.createElement("a");
-            const title = document.createElement("h2");
-            link.href = artistLink;
-            title.textContent = artistName;
+            link.appendChild(image);
+            if (artistsGenres.length != []) image.insertAdjacentElement("afterend", h3);
             link.insertAdjacentElement("afterbegin", title);
             section.insertAdjacentElement("afterbegin", link);
-
-            const followers = document.createElement("span");
-            followers.textContent = artistFollowers;
-            section.insertAdjacentElement("beforeend", followers);
-
+            link.appendChild(followers);
             main.insertAdjacentElement("afterbegin", section);
+
             fragment.appendChild(main);
 
             document.body.appendChild(fragment);
