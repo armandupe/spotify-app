@@ -7,6 +7,10 @@
   --section-border-radius: 3px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   display: flex;
   color: var(--main-font-color);
@@ -34,7 +38,7 @@ section {
 }
 
 section:hover {
-  box-shadow: 1px 1px 10px 5px #1db954;
+  box-shadow: 1px 1px 16px 4px #1db954;
   cursor: pointer;
 }
 
@@ -48,19 +52,62 @@ form {
   flex-direction: column;
 }
 
+.queryOptionsForm__input {
+  margin-bottom: 0.5rem;
+}
+
 label:hover {
   opacity: 0.7;
 }
 
-img {
-  min-width: 360px;
-  min-height: 360px;
-  max-width: 640px;
-  max-height: 320px;
-  height: auto;
-  object-fit: cover;
-  margin-bottom: 1rem;
-  border: 1px solid antiquewhite;
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+  color: #666;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: #1db954;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
 }
 
 a {
@@ -72,4 +119,39 @@ a {
 a:hover {
   text-decoration: none;
   text-shadow: 1px 1px 1px #1db954;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 1px solid antiquewhite;
+}
+
+@media (min-width: 576px) {
+  img {
+    min-width: 360px;
+    min-height: 360px;
+    max-width: 640px;
+    max-height: 320px;
+  }
+}
+
+.popularityBar {
+  padding: 0.3rem;
+  border: 1px solid antiquewhite;
+  margin-bottom: 1rem;
+}
+
+.popularityBar__low {
+  background-color: rgb(185, 48, 48);
+}
+
+.popularityBar__medium {
+  background-color: rgb(207, 194, 73);
+}
+
+.popularityBar__high {
+  background-color: rgb(58, 165, 49);
 }

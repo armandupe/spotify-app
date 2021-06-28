@@ -44,27 +44,37 @@ queryOptionsForm.addEventListener("click", (e) => {
         if (document.body.childNodes[8] === undefined) {
           const main = document.createElement("main");
           response.items.forEach((item) => {
-            let artistName = item.name;
-            let artistImages = item.images;
-            let artistPopularity = item.popularity;
-            let artistLink = item.external_urls.spotify;
-            let artistFollowers = `${item.followers.total} подписчиков`;
-            let artistsGenres = item.genres;
-
-            const section = document.createElement("section");
-            const link = document.createElement("a");
-            const image = document.createElement("img");
-            const h3 = document.createElement("h3");
-            const ul = document.createElement("ul");
-            const title = document.createElement("h2");
-            const followers = document.createElement("span");
+            const artistName = item.name,
+              artistImages = item.images,
+              artistPopularity = item.popularity,
+              artistLink = item.external_urls.spotify,
+              artistFollowers = `${item.followers.total} подписчиков`,
+              artistsGenres = item.genres,
+              section = document.createElement("section"),
+              link = document.createElement("a"),
+              image = document.createElement("img"),
+              ul = document.createElement("ul"),
+              title = document.createElement("h2"),
+              followers = document.createElement("p"),
+              popularityTitle = document.createElement("h3"),
+              popularity = document.createElement("div");
 
             image.src = artistImages[1].url;
-            h3.textContent = "Жанровые теги";
             link.target = "_blank";
             link.href = artistLink;
             title.textContent = artistName;
             followers.textContent = artistFollowers;
+            popularityTitle.textContent = "Рейтинг популярности";
+            popularity.classList.add("popularityBar");
+            popularity.style.width = `${artistPopularity}%`;
+            popularity.textContent = artistPopularity;
+            if (artistPopularity >= 1 && artistPopularity <= 40) {
+              popularity.classList.add("popularityBar__low");
+            } else if (artistPopularity >= 40 && artistPopularity <= 65) {
+              popularity.classList.add("popularityBar__medium");
+            } else if (artistPopularity >= 66) {
+              popularity.classList.add("popularityBar__high");
+            }
 
             artistsGenres.forEach((genre) => {
               let artistGenre = genre;
@@ -76,11 +86,12 @@ queryOptionsForm.addEventListener("click", (e) => {
 
             let fragment = document.createDocumentFragment();
 
-            link.appendChild(image);
-            if (artistsGenres.length != []) image.insertAdjacentElement("afterend", h3);
+            link.insertAdjacentElement("afterbegin", image);
             link.insertAdjacentElement("afterbegin", title);
             section.insertAdjacentElement("afterbegin", link);
             link.appendChild(followers);
+            link.appendChild(popularityTitle);
+            link.appendChild(popularity);
             main.insertAdjacentElement("afterbegin", section);
 
             fragment.appendChild(main);
