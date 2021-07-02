@@ -138,6 +138,10 @@ img {
   }
 }
 
+.followers {
+  font-weight: bold;
+}
+
 .popularityBar {
   padding: 0.3rem;
   border: 1px solid antiquewhite;

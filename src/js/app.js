@@ -64,6 +64,7 @@ queryOptionsForm.addEventListener("click", (e) => {
             link.href = artistLink;
             title.textContent = artistName;
             followers.textContent = artistFollowers;
+            followers.classList.add("followers");
             popularityTitle.textContent = "Рейтинг популярности";
             popularity.classList.add("popularityBar");
             popularity.style.width = `${artistPopularity}%`;
