@@ -26,7 +26,7 @@ if (!TOKEN) {
 const queryOptionsForm = document.querySelector(".queryOptionsForm");
 queryOptionsForm.addEventListener("click", (e) => {
   const TIME_RANGE = e.target.value;
-  const LIMIT = 10;
+  const LIMIT = 30;
   const OFFSET = 0;
   const URI = `https://api.spotify.com/v1/me/top/artists?time_range=${TIME_RANGE}&limit=${LIMIT}&offset=${OFFSET}`;
 
